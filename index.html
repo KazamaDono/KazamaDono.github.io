@@ -230,6 +230,9 @@
       border:1px solid var(--line); border-radius:var(--radius);
       padding:18px; color:var(--ink); position:relative
     }
+    .quote.wide{
+      grid-column: span 12;
+    }
     .quote::before{
       content:"“"; position:absolute; top:-12px; left:12px; color:var(--accent); font:900 44px/0 var(--bank);
       opacity:.4
@@ -527,20 +530,18 @@
         </div>
         <div class="testis">
           <blockquote class="quote">
-            “Consistently turns deep analysis into actionable outcomes — fast.”
-            <div class="by">— Lead Eng., Product Security</div>
+            “I've had the privilege of collaborating with Nour, and I can say with confidence that he is one of the most forward-thinking researchers I know. He is a brilliant collaborator and a true asset to the cybersecurity field. I'm excited to see the impact he will continue to make.”
+            <div class="by">— Muhammad Izaz Haider, Founder of ThePentrix</div>
           </blockquote>
           <blockquote class="quote">
-            “Thoughtful, rigorous, and generous with knowledge. Great partner on tough problems.”
-            <div class="by">— Research Manager</div>
+            “Nour has a strong motivation in systematically decreasing risk, which drives him to understand the nature and internals of every piece of technology. He expresses his thoughts with clarity, which allows him to interface across different topics naturally.”
+            <div class="by">— Kein Tung, Founder & CEO of Mentiforce</div>
           </blockquote>
-          <blockquote class="quote">
-            “Pragmatic mindset. Knows when ‘good enough’ is the right answer.”
-            <div class="by">— Senior Platform Engineer</div>
-          </blockquote>
-          <blockquote class="quote">
-            “Clear write-ups that make complex ideas digestible.”
-            <div class="by">— Security Architect</div>
+          <blockquote class="quote wide">
+            “I have had the privilege of knowing Nour for some time now, and I can confidently say that he is one of the most hard-working, honest, and resilient individuals I have ever met.
+            Nour approaches every challenge with quiet determination and an unwavering commitment to doing his best. No matter how tough things get, he never gives up. His ability to persevere through obstacles with grace and strength is truly inspiring.
+            In every interaction, Nour brings reliability, positivity, and a strong sense of purpose. Anyone who has the chance to work with or know Nour is better for it. I wholeheartedly recommend him and can speak to his exceptional character without hesitation.”
+            <div class="by">— Yousef Alkarnaz, Co-Founder of 5 Before 5 Solutions</div>
           </blockquote>
         </div>
       </div>
@@ -1495,6 +1496,16 @@ function preventNavigationKeys(e) {
         shutdownTerminal();
       }
     };
+
+
+
+
+
+
+
+
+
+
 
 
 
