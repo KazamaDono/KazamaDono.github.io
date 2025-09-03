@@ -912,5 +912,717 @@
     };
     observeDna();
   </script>
+
+<!-- ====================== SPECTRA TERMINAL MODE (Appended) ====================== -->
+<style id="spectra-terminal-styles">
+:root {
+  --term-bg: #050607;
+  --term-bg2: #070a0d;
+  --term-ink: #e6f1ff;
+  --term-danger: #ff4f6e;
+  --term-blue: #1ade00;
+  --term-cyan: #00c30a;
+  --term-white: #f6f7fb;
+  --term-muted: #9eb3c7;
+  --term-grid: rgb(0, 0, 0);
+  --term-glow: 0 0 20px var(--term-danger), 0 0 40px rgba(255,79,110,.2);
+  --term-radius: 16px;
+  --term-line: rgba(255,79,110,.25);
+}
+
+#terminalRoot {
+  position: fixed;
+  inset: 0;
+  display: none;
+  grid-template-rows: 1fr auto;
+  background: radial-gradient(1200px 800px at 50% 50%, var(--term-bg2), var(--term-bg));
+  color: var(--term-ink);
+  z-index: 999999;
+  overflow: hidden;
+}
+
+#prebootMask {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center; justify-content: center;
+  background: linear-gradient(180deg, #000 0%, #0a0a0f 100%);
+  z-index: 2;
+}
+
+.scanlines::before, .scanlines::after {
+  content: "";
+  position: absolute; inset:0;
+  pointer-events: none;
+}
+.scanlines::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,79,110,0.06) 0px,
+    rgba(255,79,110,0.06) 2px,
+    transparent 3px,
+    transparent 4px
+  );
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+.scanlines::after {
+  background: radial-gradient(800px 400px at 50% 0%, rgba(255,79,110,.25), transparent 60%);
+  filter: blur(12px);
+}
+
+#bootConsole {
+  width: min(920px, 90vw);
+  max-height: 70vh;
+  border: 1px solid var(--term-line);
+  border-radius: var(--term-radius);
+  background: linear-gradient(180deg, rgba(255,79,110,0.06), rgba(0,0,0,.02));
+  box-shadow: var(--term-glow);
+  padding: 18px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  overflow: auto;
+  position: relative;
+  animation: flickerGlitch 1.2s infinite;
+}
+@keyframes flickerGlitch {
+  0%,19%,21%,50%,55%,100% { opacity:1; transform:translate(0,0) }
+  20% { opacity:0.85; transform:translate(-1px,1px) }
+  51% { opacity:0.9; transform:translate(1px,-1px) }
+}
+#bootConsole .line { white-space: pre-wrap; margin:2px 0; text-shadow:0 0 4px rgba(255,79,110,0.6);}
+#bootConsole .ok { color:#00FF41 }
+#bootConsole .warn { color:#ffe48f }
+#bootConsole .fail { color:#ff8fa3 }
+#bootConsole .blue { color: var(--term-blue) }
+#bootConsole .blink { animation: termBlink 1s steps(1,end) infinite; }
+@keyframes termBlink { 50% { opacity: 0 } }
+
+#termGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr min(840px,62vw);
+  gap:24px;
+  padding:min(4vw,28px);
+  z-index:1;
+}
+#globeCanvas {
+  width:100%; height:100%;
+  border:1px solid var(--term-line);
+  border-radius:var(--term-radius);
+  background:
+    radial-gradient(1000px 1000px at 50% 50%, rgba(255,79,110,.08), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.08));
+  box-shadow: var(--term-glow);
+}
+
+.term-window {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: 1px solid var(--term-line);
+  border-radius: var(--term-radius);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,79,110,.06), rgba(0,0,0,.02));
+  box-shadow: var(--term-glow);
+}
+.term-title {
+  padding:10px 14px;
+  font:600 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  letter-spacing:.14em;
+  text-transform: uppercase;
+  color: var(--term-danger);
+  border-bottom:1px solid var(--term-line);
+  display:flex; align-items:center; gap:10px;
+}
+.term-title .dot {
+  width:10px; height:10px; border-radius:999px; background: var(--term-danger); box-shadow: var(--term-glow)
+}
+.term-output {
+  padding:14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:14px;
+  color: var(--term-white);
+  overflow:auto;
+  min-height:240px;
+}
+.term-input {
+  display:flex; align-items:center; gap:8px;
+  padding:12px 14px;
+  border-top:1px solid var(--term-line);
+  font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(255,255,255,.02));
+}
+.term-input .prompt { color: var(--term-danger); white-space: pre; }
+.term-input input {
+  flex:1;
+  background:transparent;
+  border:none;
+  outline:none;
+  color: var(--term-white);
+  caret-color: var(--term-blue);
+  font-size:14px;
+}
+
+#terminalRoot::before {
+  content:"";
+  position:absolute; inset:-200px -200px;
+  background:
+    repeating-linear-gradient(to right, var(--term-grid) 0 1px, transparent 1px 80px),
+    repeating-linear-gradient(to bottom, var(--term-grid) 0 1px, transparent 1px 80px);
+  transform: perspective(900px) rotateX(55deg) translateY(-20%);
+  animation: gridDrift 22s linear infinite, scanShift 0.5s steps(2, start) infinite;
+  z-index:0;
+}
+@keyframes gridDrift {
+  0% { transform: perspective(900px) rotateX(55deg) translateY(-20%) translateX(0) }
+  100% { transform: perspective(900px) rotateX(55deg) translateY(-20%) translateX(-80px) }
+}
+@keyframes scanShift {
+  0%,100% { transform: translateX(0) }
+  50% { transform: translateX(-3px) }
+}
+
+  /* Secret input block injected under Reduce Motion */
+  .secret-block {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px;
+    background: linear-gradient(180deg, rgba(100,181,255,.06), rgba(0,0,0,.12));
+    box-shadow: 0 10px 30px rgba(57,160,255,.08);
+  }
+  .secret-block h3 {
+    font: 600 12px/1 var(--bank);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .secret-input {
+    display: flex; gap: 8px;
+    align-items: center;
+  }
+  .secret-input input[type="password"] {
+    flex: 1;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: rgba(0,0,0,.25);
+    color: var(--ink);
+    outline: none;
+  }
+  .secret-input button {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: linear-gradient(180deg, rgba(100,181,255,.14), rgba(100,181,255,.08));
+    color: var(--ink);
+    cursor: pointer;
+  }
+</style>
+
+<div id="terminalRoot" role="application" aria-label="Spectra Terminal Interface">
+  <div id="prebootMask" class="scanlines">
+    <div id="bootConsole" aria-live="polite" aria-atomic="false"></div>
+  </div>
+
+  <div id="termGrid" aria-hidden="true">
+    <canvas id="globeCanvas" aria-label="Wireframe globe visualization"></canvas>
+
+    <div class="term-window">
+      <div class="term-title"><span class="dot"></span> SPECTRA // Command Line Interface</div>
+      <div id="termOut" class="term-output" role="log"></div>
+      <div class="term-input">
+        <span class="prompt">[spectra@neo ~]$ </span>
+        <input id="termIn" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="spectra-terminal-script">
+(() => {
+  const qs = (s, el=document) => el.querySelector(s);
+  const qsa = (s, el=document) => [...el.querySelectorAll(s)];
+  const on = (el, ev, fn, opts) => el && el.addEventListener(ev, fn, opts);
+
+  /* 1) Inject the "Enter Secret Key" block below Reduce Motion */
+  function injectSecretKeyUI() {
+    const controls = qs('.panel .controls');
+    if (!controls || qs('#secretKeyBlock')) return;
+    const wrap = document.createElement('div');
+    wrap.id = 'secretKeyBlock';
+    wrap.className = 'secret-block';
+    wrap.style.marginTop = '8px';
+    wrap.innerHTML = `
+      <h3>Enter Secret Key</h3>
+      <div class="secret-input">
+        <input id="secretKeyInput" type="password" placeholder="••••" aria-label="Enter secret key" />
+        <button id="secretKeyBtn" type="button">Unlock</button>
+      </div>
+      <div id="secretHint" style="margin-top:8px;font-size:12px;color:var(--muted)">Hint: ask nicely.</div>
+    `;
+    // Place right after the controls (under Toggle Theme / Reduce Motion)
+    controls.insertAdjacentElement('afterend', wrap);
+
+    const input = qs('#secretKeyInput', wrap);
+    const btn   = qs('#secretKeyBtn', wrap);
+    const go = () => {
+      if (input.value === '1234') {
+        startTransformSequence();
+      } else {
+        const hint = qs('#secretHint', wrap);
+        hint.textContent = 'Invalid key.';
+        hint.style.color = '#ff8fa3';
+        input.focus();
+        input.select();
+      }
+    };
+    on(btn, 'click', go);
+    on(input, 'keydown', (e) => {
+      if (e.key === 'Enter') go();
+    });
+  }
+
+
+
+
+
+
+
+
+
+  
+  /* 2) Transformation sequence -> Boot -> Terminal */
+  // State
+  let active = false;
+  let shortcutBlocker = null;
+  let originalKeyHandler = null;
+  const globalShortcutFlag = { blocked: false };
+  
+  let transforming = false;
+  function startTransformSequence() {
+    if (transforming) return;
+    transforming = true;
+
+    const root = qs('#terminalRoot');
+    const pre  = qs('#prebootMask');
+    const boot = qs('#bootConsole');
+
+    root.style.display = 'grid';
+    pre.style.display = 'flex';
+    // Pause background scroll
+    document.documentElement.style.overflow = 'hidden';
+
+    // Fancy glitch flicker of the whole page beneath
+    document.body.animate(
+      [
+        { filter: 'none' },
+        { filter: 'contrast(140%) saturate(120%) hue-rotate(10deg)' },
+        { filter: 'contrast(80%) saturate(90%) hue-rotate(-8deg)' },
+        { filter: 'none' }
+      ],
+      { duration: 900, iterations: 1, easing: 'steps(8,end)' }
+    );
+
+
+
+    
+function preventNavigationKeys(e) {
+    const target = e.target;
+    const isEditable =
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.isContentEditable;
+
+    // Allow typing normally
+    if (isEditable) return;
+
+    // Keys that can navigate away (common shortcuts)
+    const blockedKeys = ['l', 'g', 'r', 't', 'w']; // add more if needed
+    const ctrlOrCmd = e.ctrlKey || e.metaKey;
+    const altKey = e.altKey;
+
+    // Block Ctrl/Command + key, Alt + key navigation, and F5 refresh
+    if (
+      (ctrlOrCmd && blockedKeys.includes(e.key.toLowerCase())) || 
+      (altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) ||
+      e.key === 'F5'
+    ) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      return false;
+    }
+  }
+
+    // Attach globally at capture phase
+    window.addEventListener('keydown', preventNavigationKeys, true);
+
+    // Boot log typing
+    const lines = [
+      '[FAIL] Initializing Spectra profile...',
+      '[OK] Initializing Spectra profile...',
+      '[OK] Kernel hooks: injected',
+      '[OK] TTY multiplexers: online',
+      '[OK] Glyph pipeline: hot',
+      '[OK] Canvas accelerators: active',
+      '[OK] Entropy pool: saturated',
+      '[WARN] Sandbox escape: denied',
+      '[OK] Wireframe globe: compiling shader...',
+      '[OK] Shader: compiled',
+      '[OK] Loading fake FS...',
+      '[OK] User: spectra@neo',
+      '[OK] MOTD: Stay sharp. Stay spectral.',
+      '[OK] Loading cyber grid modules…',
+      '[FAIL] Decrypting neural paths…',
+      '[FAIL] Decrypting neural paths…',
+      '[FAIL] Decrypting neural paths…',
+      '[OK] Decrypting neural paths…',
+      '[OK] Injecting anomaly scanners…',
+      '[OK] Fusing digital / physical vectors…',
+      '[OK] Establishing wireframe globe…',
+      '[OK] Applying security protocols…',
+      '[OK] Terminal ready. Welcome back, Operator.',
+      '[OK] Launching terminal...'
+    ];
+
+    function writeLine(html, cls='line') {
+      const div = document.createElement('div');
+      div.className = `line ${cls}`.trim();
+      div.innerHTML = html;
+      boot.appendChild(div);
+      boot.scrollTop = boot.scrollHeight;
+    }
+
+    // Simulate typeout
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i < lines.length) {
+        const l = lines[i];
+        let cls = 'line';
+        if (l.startsWith('[OK]')) cls += ' ok';
+        if (l.startsWith('[WARN]')) cls += ' warn';
+        if (l.startsWith('[FAIL]')) cls += ' fail';
+        writeLine(l, cls);
+        i++;
+      } else {
+        clearInterval(timer);
+        // Small pause then reveal terminal
+        setTimeout(() => {
+          pre.style.display = 'none';
+          qs('#termGrid').setAttribute('aria-hidden', 'false');
+          bootTerminal();
+        }, 500);
+      }
+    }, 350);
+  }
+
+  /* 3) Terminal implementation */
+  function bootTerminal() {
+    const out = qs('#termOut');
+    const input = qs('#termIn');
+
+    // Fake FS
+    const FS = {
+      'home': {
+        'spectra': {
+          'notes': {
+            'todo.txt': '— map CVE chains\n— write Spectre draft\n— automate IOC extraction\n'
+          },
+          'projects': {
+            'sentinel': 'Host monitoring tool notes...',
+            'pocketvault': 'Encryption tool docs...'
+          },
+          'secrets': {
+            'key.txt': 'lol not this time',
+            'hint.txt': 'try social engineering yourself'
+          }
+        }
+      },
+      'var': {
+        'log': {
+          'kern.log': '[spectra] harmless fake log...'
+        }
+      },
+      'opt': {
+        'blackarch': {
+          'readme.md': '# BlackArch vibes only'
+        }
+      },
+      'Tetris': {
+        'p1ay': '[Executable: Tetris Game]',
+          'score.txt': 'No high scores yet...'
+}
+
+    };
+
+    // Shell state
+    let CWD = ['/','home','spectra'];
+    const HISTORY = [];
+    let histIdx = -1;
+
+    function prompt() {
+      return `[spectra@neo ${CWD.join('/').replace('//','/')}]$ `;
+    }
+    function setPrompt() {
+      qs('.term-input .prompt').textContent = prompt();
+    }
+    function print(s='', cls='') {
+      const div = document.createElement('div');
+      if (cls) div.className = cls;
+      div.innerHTML = s;
+      out.appendChild(div);
+      out.scrollTop = out.scrollHeight;
+    }
+    function color(s,c='var(--term-blue)'){ return `<span style="color:${c}">${s}</span>` }
+
+    // Traverse FS helper
+    function getNode(pathParts) {
+      let node = FS;
+      for (const p of pathParts) {
+        if (!p || p === '/') continue;
+        if (typeof node !== 'object' || !(p in node)) return undefined;
+        node = node[p];
+      }
+      return node;
+    }
+
+    function normPath(arg) {
+      const parts = arg.startsWith('/') ? ['/', ...arg.split('/').filter(Boolean)] : [...CWD, ...arg.split('/').filter(Boolean)];
+      const stack = [];
+      for (const p of parts) {
+        if (p === '.' || p === '') continue;
+        if (p === '..') { stack.pop(); continue; }
+        stack.push(p);
+      }
+      if (stack[0] !== '/') stack.unshift('/');
+      return stack;
+    }
+
+    const cmds = {
+      he1p() {
+        print([
+          color('Available commands:'),
+          '  he1p, c1ear, 1s, cd, pwd, cat <file>,',
+          '  search <keyword>, find <name>, neofetch, matrix, scan, exit',
+          '  p1ay'
+        ].join('\n'));
+      },
+      c1ear() { out.innerHTML = '' },
+      '1s'(arg='.') {
+        const p = normPath(arg);
+        const node = getNode(p);
+        if (!node || typeof node !== 'object') return print('ls: not a directory');
+        const entries = Object.keys(node).sort();
+        print(entries.map(e=>`- ${e}`).join('\n'));
+      },
+      cd(arg='~') {
+        if (arg === '~') { CWD = ['/','home','spectra']; setPrompt(); return }
+        const p = normPath(arg);
+        const node = getNode(p);
+        if (!node || typeof node !== 'object') return print('cd: no such directory');
+        CWD = p;
+        setPrompt();
+      },
+      pwd() { print(CWD.join('/').replace('//','/')) },
+      cat(arg) {
+        if (!arg) return print('cat: missing file');
+        const p = normPath(arg);
+        const node = getNode(p);
+        if (typeof node === 'string') print(node);
+        else print('cat: not a file');
+      },
+      search(arg) {
+        if (!arg) return print('search: provide a keyword');
+        const matches = [];
+        function walk(node, path=[]) {
+          if (typeof node === 'string') {
+            if (node.toLowerCase().includes(arg.toLowerCase())) matches.push(path.join('/'));
+          } else if (typeof node === 'object') {
+            for (const k in node) walk(node[k], [...path, k]);
+          }
+        }
+        walk(FS);
+        if (!matches.length) print('search: no matches');
+        else print(matches.map(m=>`> ${m}`).join('\n'));
+      },
+      find(arg) {
+        if (!arg) return print('find: provide a name');
+        const matches = [];
+        function walk(node, path=[]) {
+          if (typeof node === 'string') {
+            if (path[path.length-1].includes(arg)) matches.push(path.join('/'));
+          } else if (typeof node === 'object') {
+            for (const k in node) {
+              if (k.includes(arg)) matches.push([...path,k].join('/'));
+              walk(node[k], [...path,k]);
+            }
+          }
+        }
+        walk(FS);
+        if (!matches.length) print('find: no matches');
+        else print(matches.map(m=>`> ${m}`).join('\n'));
+      },
+      neofetch() {
+        const art = [
+          color('        /\\'),
+          color('       /  \\      S P E C T R A'),
+          color('      / /\\ \\    v0.1'),
+          color('     / ____ \\    ui: blue/black/white'),
+          color('    /_/    \\_\\  globe: wireframe')
+        ].join('\n');
+        print(art);
+      },
+      matrix() {
+        // fun blinkers
+        const line = document.createElement('div');
+        line.className = 'blink';
+        line.textContent = ' ████████████████████████████████████ ';
+        out.appendChild(line);
+        setTimeout(()=> line.remove(), 2500);
+      },
+      scan() {
+        print(color('scanning subsystems...'));
+        setTimeout(()=>print('[OK] UI transformation stable'), 400);
+        setTimeout(()=>print('[OK] Canvas pipelines nominal'), 800);
+        setTimeout(()=>print('[OK] User presence detected: azure'), 1200);
+        setTimeout(()=>print(color('scan complete.')), 1600);
+      },
+      p1ay() {
+        if (currentPath.join("/") === "home/spectra") {
+          window.open('tetris.html', '_blank');
+        }
+      },
+      exit() {
+        shutdownTerminal();
+      }
+    };
+
+
+
+
+
+    
+    function handle(cmdline) {
+      const [name, ...args] = cmdline.trim().split(/\s+/);
+      if (!name) return;
+      if (cmds[name]) cmds[name](...args);
+      else print(`${name}: command not found`);
+    }
+
+    function shutdownTerminal() {
+      const root = qs('#terminalRoot');
+      root.style.display = 'none';
+      document.documentElement.style.overflow = '';
+      // reset input value for security theater
+      const sk = qs('#secretKeyInput');
+      if (sk) sk.value = '';
+      qs('#termOut').innerHTML = '';
+    }
+
+    // greet
+    print(color('Welcome to this simulated terminal. Type "he1p" to begin.'));
+    setPrompt();
+    input.focus();
+
+    on(input, 'keydown', (e) => {
+      if (e.key === 'Enter') {
+        const v = input.value;
+        print(`${prompt()}${v}`);
+        HISTORY.push(v);
+        histIdx = HISTORY.length;
+        handle(v);
+        input.value = '';
+      } else if (e.key === 'ArrowUp') {
+        if (histIdx > 0) histIdx--;
+        input.value = HISTORY[histIdx] || '';
+        setTimeout(()=> input.setSelectionRange(input.value.length, input.value.length), 0);
+      } else if (e.key === 'ArrowDown') {
+        if (histIdx < HISTORY.length) histIdx++;
+        input.value = HISTORY[histIdx] || '';
+        setTimeout(()=> input.setSelectionRange(input.value.length, input.value.length), 0);
+      } else if (e.key === 'c' && e.ctrlKey) {
+        print('^C');
+        input.value = '';
+      }
+    });
+
+    // Globe animation
+    bootGlobe();
+    function bootGlobe() {
+      const canvas = qs('#globeCanvas');
+      const ctx = canvas.getContext('2d');
+      const DPR = Math.max(1, Math.min(2, devicePixelRatio || 1));
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = Math.floor(rect.width * DPR);
+        canvas.height = Math.floor(rect.height * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let t = 0;
+      (function draw() {
+        const { width:w, height:h } = canvas;
+        ctx.clearRect(0,0,w,h);
+        const cx = w/DPR/2, cy = h/DPR/2;
+        const R = Math.min(cx, cy) * 0.8;
+
+        // glow
+        ctx.save();
+        ctx.translate(cx, cy);
+        const grd = ctx.createRadialGradient(0,0, R*0.2, 0,0, R);
+        grd.addColorStop(0, 'rgba(0,255,65,0.18)');
+        grd.addColorStop(1, 'rgba(0,255,65,0.02)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(0,0,R,0,Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.strokeStyle = 'rgba(0,255,65,0.55)';
+        ctx.lineWidth = 1.1;
+
+        // meridians & parallels
+        const meridians = 24;
+        const parallels = 12;
+        for (let i=0;i<meridians;i++) {
+          const a = (i/meridians)*Math.PI*2 + t*0.01;
+          ctx.beginPath();
+          for (let th=-Math.PI/2; th<=Math.PI/2; th+=Math.PI/180) {
+            const x = cx + R*Math.cos(th)*Math.cos(a);
+            const y = cy + R*Math.sin(th);
+            if (th === -Math.PI/2) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.stroke();
+        }
+        for (let j=1;j<parallels;j++) {
+          const th = -Math.PI/2 + (j/parallels)*Math.PI;
+          ctx.beginPath();
+          for (let a=0; a<=Math.PI*2; a+=Math.PI/180) {
+            const x = cx + R*Math.cos(th)*Math.cos(a + t*0.01);
+            const y = cy + R*Math.sin(th);
+            if (a === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.stroke();
+        }
+        t += 1;
+        requestAnimationFrame(draw);
+      })();
+    }
+  }
+
+
+  // Initialize: wait for DOM then inject UI
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectSecretKeyUI);
+  } else {
+    injectSecretKeyUI();
+  }
+
+})();
+</script>
+<!-- ==================== END SPECTRA TERMINAL MODE (Appended) ==================== -->
+
 </body>
 </html>
