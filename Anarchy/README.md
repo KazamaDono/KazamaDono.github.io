@@ -1,6 +1,6 @@
 # Anarchy
 Anarchy is a learning institution initiative under the Spectra Vulnerability Research Group.
-<img width="887" height="601" alt="anarchy1" src="https://github.com/user-attachments/assets/f67575b4-bb27-4b95-90a5-d5ddd20a6a91" />
+<img width="1019" height="494" alt="Screenshot 2025-08-27 230342" src="https://github.com/user-attachments/assets/37a0e7d5-0233-4e44-8494-39e3f7a86294" />
 
 
 
