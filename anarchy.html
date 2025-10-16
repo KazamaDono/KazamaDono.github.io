@@ -439,11 +439,18 @@ body { overflow: hidden; background: #fff; }
           <div class="mt-6 flex flex-wrap gap-3 font-mono text-xs" role="tablist" aria-label="Course filter chips">
             <button class="filter-chip active rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="all" role="tab" aria-selected="true">All</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="aiml" role="tab">AI/ML</button>
-            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="exploits" role="tab">Exploits</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="exploits" role="tab">Low Level</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="psyops" role="tab">PsyOps</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="bio" role="tab">Bio/Med</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="infra" role="tab">Infra</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="blue" role="tab">Defensive</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="red" role="tab">Offensive</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="osint" role="tab">OSINT</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="game" role="tab">Game Hacking</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="webappsec" role="tab">BugBounty</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="project" role="tab">Project</button>
+            
+
           </div>
 
           <div class="mt-4 flex gap-3 font-mono text-xs">
@@ -461,7 +468,7 @@ body { overflow: hidden; background: #fff; }
                 <div class="font-mono text-[10px] tracking-widest text-slate-400">COURSES</div>
               </div>
               <div class="p-4 rounded-xl bg-bgd-deep/70 border border-teal-900/30">
-                <div class="font-display text-3xl" id="statTracks">4</div>
+                <div class="font-display text-3xl" id="statTracks">10</div>
                 <div class="font-mono text-[10px] tracking-widest text-slate-400">TRACKS</div>
               </div>
               <div class="p-4 rounded-xl bg-bgd-deep/70 border border-teal-900/30">
@@ -741,7 +748,7 @@ body { overflow: hidden; background: #fff; }
         title: 'LLM System Development',
         desc: 'Dive deep into the architecture and optimization of large language model infrastructures. Explore advanced techniques such as KV caching, Flash Attention, model parallelism, batching strategies, and latency tuning.',
         tags: ['aiml'],
-        href: 'https://discord.com/invite/nWW5zyXKBm',
+        href: 'https://www.mentiforce.ai/',
         img: 'llm23.gif'
       },
       {
@@ -749,7 +756,7 @@ body { overflow: hidden; background: #fff; }
         title: 'LLM Application Development',
         desc: 'Learn to transform LLMs into practical, high-impact AI products. Focus on prompt engineering, fine-tuning, tool integration, and API orchestration to create applications that solve real-world challenges.',
         tags: ['aiml'],
-        href: 'https://discord.com/invite/nWW5zyXKBm',
+        href: 'https://www.mentiforce.ai/',
         img: 'grid.gif'
       },
       {
@@ -764,7 +771,7 @@ body { overflow: hidden; background: #fff; }
         id: '0004',
         title: 'AV/EDR Evasion Practical Techniques',
         desc: 'Advanced techniques to bypass modern Antivirus and EDR solutions through real-world offensive development strategies.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://redteamleaders.coursestack.com/courses/3e9e0212-81dc-49ed-9233-ec9ca894fc6a',
         img: 'sh.gif'
       },
@@ -772,7 +779,7 @@ body { overflow: hidden; background: #fff; }
         id: '0005',
         title: 'Foundations of Log Analysis for Cyber Defense',
         desc: 'Learn to detect threats, understand system behavior, and respond to incidents through structured log analysis.',
-        tags: [''],
+        tags: ['blue'],
         href: 'https://redteamleaders.coursestack.com/courses/5ba830c2-0137-431a-8619-4370fc325b22',
         img: 'obg.gif'
       },
@@ -780,7 +787,7 @@ body { overflow: hidden; background: #fff; }
         id: '0006',
         title: 'Fundamentals of Game Hacking Development',
         desc: 'A Beginner’s Guide to Memory Manipulation, Reverse Engineering, and External/Internal Game Cheats',
-        tags: [''],
+        tags: ['game'],
         href: 'https://redteamleaders.coursestack.com/courses/c0f369dc-356d-4362-8942-b5446e02164b',
         img: 'loop.gif'
       },
@@ -788,7 +795,7 @@ body { overflow: hidden; background: #fff; }
         id: '0007',
         title: 'Introduction to Bug Bounty',
         desc: 'Methods, Recon and Real-World Vulnerabilities',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://redteamleaders.coursestack.com/courses/9372210c-d41a-4893-b87c-ddf7076750e1',
         img: 'black.gif'
       },
@@ -804,7 +811,7 @@ body { overflow: hidden; background: #fff; }
         id: '0009',
         title: 'Introduction to Python for Defensive Security',
         desc: 'A hands-on introduction to automating defensive security tasks with Python',
-        tags: [''],
+        tags: ['blue'],
         href: 'https://redteamleaders.coursestack.com/courses/112c82c5-933f-4a83-8bca-8c825b905309',
         img: 'download.gif'
       },
@@ -812,7 +819,7 @@ body { overflow: hidden; background: #fff; }
         id: '0010',
         title: 'Introduction to Python for Offensive Security',
         desc: 'This course aims to provide participants with a practical and direct view of how to use the Python language in offensive security activities.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://redteamleaders.coursestack.com/courses/ce82d160-2ef7-4f2c-8b15-e5ea742b1877',
         img: 'fgh.gif'
       },
@@ -820,7 +827,7 @@ body { overflow: hidden; background: #fff; }
         id: '0011',
         title: 'Introduction to Red Team Operation Management',
         desc: 'Planning, Execution and Coordination of Offensive Operations with a Focus on Real Results',
-        tags: [''],
+        tags: ['red'],
         href: 'https://redteamleaders.coursestack.com/courses/1390aba4-3ad7-4ae2-8e2a-4575a821b0f7',
         img: 'land.gif'
       },
@@ -828,7 +835,7 @@ body { overflow: hidden; background: #fff; }
         id: '0012',
         title: 'Malware Analysis Introduction v1',
         desc: 'Foundations, Techniques, and Operational Relevance for Blue and Red Teams',
-        tags: [''],
+        tags: ['red','blue'],
         href: 'https://redteamleaders.coursestack.com/courses/e8bb66f3-4920-4694-8323-04795d7556be',
         img: 'hole.gif'
       },
@@ -836,7 +843,7 @@ body { overflow: hidden; background: #fff; }
         id: '0013',
         title: 'Offensive Development Introduction for Windows v1',
         desc: 'Learn the fundamentals of offensive development on Windows, including evasion techniques, API abuse, and shellcode execution. Designed for aspiring Red Teamers and security researchers',
-        tags: ['Exploits'],
+        tags: ['exploits','red'],
         href: 'https://redteamleaders.coursestack.com/courses/62c9b0f6-6a0a-488c-870b-4ca0ac754378',
         img: 'glitch.gif'
       },
@@ -844,7 +851,7 @@ body { overflow: hidden; background: #fff; }
         id: '0014',
         title: 'OpSec & Anonymity for Red Teams',
         desc: 'Advanced Operational Security and Digital Anonymity for Offensive Security Professionals',
-        tags: [''],
+        tags: ['red'],
         href: 'https://redteamleaders.coursestack.com/courses/e07e722b-642c-4191-b3a3-29cf39236968',
         img: 'final.gif'
       },
@@ -852,7 +859,7 @@ body { overflow: hidden; background: #fff; }
         id: '0015',
         title: 'Purple Team - Active Directory and AzureAD v1',
         desc: 'Red Teaming and Blue Teaming Tactics',
-        tags: [''],
+        tags: ['red','blue','infra'],
         href: 'https://redteamleaders.coursestack.com/courses/998adff7-947b-479f-a375-40d9e86ff66e',
         img: 'tunnel.gif'
       },
@@ -860,7 +867,7 @@ body { overflow: hidden; background: #fff; }
         id: '0016',
         title: 'Windows API for Red Team Introduction',
         desc: 'Windows API Fundamentals for Red Team Operations',
-        tags: [''],
+        tags: ['red','exploits'],
         href: 'https://redteamleaders.coursestack.com/courses/96e8cffc-ac6e-4605-b7e1-39c6c26bd2e8',
         img: 'theOne.gif'
       },
@@ -876,7 +883,7 @@ body { overflow: hidden; background: #fff; }
         id: '0018',
         title: 'CSAM Combat & Investigation Introduction',
         desc: 'Advanced Techniques and Tools for the Detection, Analysis, and Prevention of CSAM',
-        tags: [''],
+        tags: ['blue'],
         href: 'https://redteamleaders.coursestack.com/courses/2a412d31-a2e4-47ce-9709-14f711e1d53b',
         img: 'redg.gif'
       },
@@ -884,7 +891,7 @@ body { overflow: hidden; background: #fff; }
         id: '0019',
         title: 'Healthcare Hacking Introduction',
         desc: 'Hacking in Healthcare: Offensive and Defensive Security Strategies for Medical Environments',
-        tags: [''],
+        tags: ['bio'],
         href: 'https://redteamleaders.coursestack.com/courses/08500f44-7c39-4ff0-8753-8f2ff474db8d',
         img: 'red.gif'
       },
@@ -892,7 +899,7 @@ body { overflow: hidden; background: #fff; }
         id: '0020',
         title: 'Spear-Phishing and OpSec Techniques',
         desc: 'From Initial Access to Long-Term Persistence: Advanced Tradecraft in Spear-Phishing and Operator OpSec',
-        tags: [''],
+        tags: ['red'],
         href: 'https://redteamleaders.coursestack.com/courses/c14b2eb7-47e3-473b-aba5-ed923c28682d',
         img: 'gl.gif'
       },
@@ -900,7 +907,7 @@ body { overflow: hidden; background: #fff; }
         id: '0021',
         title: 'Beginner Level OSINT',
         desc: 'Beginners Lessons to Open Source Intelligence by Mishaal Khan',
-        tags: [''],
+        tags: ['osint'],
         href: 'https://learn.justhacking.com/courses/c8fd1f1c-b1aa-42b4-8aa3-84d21c1ad32c',
         img: '1.gif'
       },
@@ -916,7 +923,7 @@ body { overflow: hidden; background: #fff; }
         id: '0023',
         title: 'Lakera Gandalf',
         desc: 'Prompt engineering simulated game.',
-        tags: [''],
+        tags: ['aiml'],
         href: 'https://gandalf.lakera.ai/baseline',
         img: '3.gif'
       },
@@ -972,7 +979,7 @@ body { overflow: hidden; background: #fff; }
         id: '0030',
         title: 'PortSwigger',
         desc: 'Web Security Academy Learning Paths.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths',
         img: '10.gif'
       },
@@ -980,7 +987,7 @@ body { overflow: hidden; background: #fff; }
         id: '0031',
         title: 'Web cache deception',
         desc: 'This learning path covers web cache deception vulnerabilities. Youll learn how to identify discrepancies between how the origin server and cache handle requests and how to leverage the discrepancies to create path confusion.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/web-cache-deception',
         img: '11.gif'
       },
@@ -988,7 +995,7 @@ body { overflow: hidden; background: #fff; }
         id: '0032',
         title: 'WebSockets vulnerabilities',
         desc: 'This learning path covers the identification and exploitation of security vulnerabilities specific to WebSockets in web applications.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/websockets-security-vulnerabilities',
         img: '12.gif'
       },
@@ -996,7 +1003,7 @@ body { overflow: hidden; background: #fff; }
         id: '0033',
         title: 'Authentication vulnerabilities',
         desc: 'This learning path explores authentication vulnerabilities, which have a critical impact on security. Youll learn about common mechanisms and vulnerabilities, and strategies for robust authentication.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/authentication-vulnerabilities',
         img: '13.gif'
       },
@@ -1004,7 +1011,7 @@ body { overflow: hidden; background: #fff; }
         id: '0034',
         title: 'Server-side request forgery (SSRF) attacks',
         desc: 'This learning path teaches you about server-side request forgery (SSRF). Youll learn about its impact, common techniques used in attacks, and how to defend against them.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/ssrf-attacks',
         img: '14.gif'
       },
@@ -1012,7 +1019,7 @@ body { overflow: hidden; background: #fff; }
         id: '0035',
         title: 'Prototype pollution',
         desc: 'This learning path introduces you to prototype pollution vulnerabilities in JavaScript. Youll learn what prototype pollution is, how it can be exploited, and how to prevent it in your applications.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/prototype-pollution',
         img: '15.gif'
       },
@@ -1020,7 +1027,7 @@ body { overflow: hidden; background: #fff; }
         id: '0036',
         title: 'Clickjacking (UI redressing)',
         desc: 'This learning path deals with clickjacking attacks. Youll learn the fundamentals of clickjacking, how to construct basic attacks, and implement server-side and client-side defense strategies.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/clickjacking',
         img: '16.gif'
       },
@@ -1028,7 +1035,7 @@ body { overflow: hidden; background: #fff; }
         id: '0037',
         title: 'GraphQL API vulnerabilities',
         desc: 'This learning path explores common vulnerabilities associated with GraphQL APIs due to implementation and design flaws. Youll learn how to find GraphQL endpoints, bypass some common defenses, and exploit a range of GraphQL API vulnerabilities.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/graphql-api-vulnerabilities',
         img: '17.gif'
       },
@@ -1036,7 +1043,7 @@ body { overflow: hidden; background: #fff; }
         id: '0038',
         title: 'Cross-origin resource sharing (CORS)',
         desc: 'This learning path provides an in-depth understanding of CORS, including common examples of CORS-based attacks and how to protect against these attacks.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/cors',
         img: '18.gif'
       },
@@ -1044,7 +1051,7 @@ body { overflow: hidden; background: #fff; }
         id: '0039',
         title: 'Path traversal',
         desc: 'This learning path covers path traversal vulnerabilities. Youll learn how to carry out path traversal attacks and circumvent common obstacles. Youll also learn how to prevent path traversal attacks.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/path-traversal',
         img: '19.gif'
       },
@@ -1052,7 +1059,7 @@ body { overflow: hidden; background: #fff; }
         id: '0040',
         title: 'NoSQL injection',
         desc: 'This learning path covers the detection, exploitation, and prevention of NoSQL injection vulnerabilities. Youll explore the differences between NoSQL and SQL injection, learn how to perform NoSQL syntax injection, and how to use NoSQL operators to manipulate queries.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/nosql-injection',
         img: '20.gif'
       },
@@ -1060,7 +1067,7 @@ body { overflow: hidden; background: #fff; }
         id: '0041',
         title: 'Race conditions',
         desc: 'This learning path covers race conditions, a common vulnerability in web applications where concurrent processes lead to unintended behavior. Youll learn how to identify, exploit, and prevent race conditions, leveraging tools like Burp Suites Repeater and the Turbo Intruder extension.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/race-conditions',
         img: '21.gif'
       },
@@ -1068,7 +1075,7 @@ body { overflow: hidden; background: #fff; }
         id: '0042',
         title: 'Cross-site request forgery (CSRF)',
         desc: 'This learning path covers CSRF (Cross-Site Request Forgery). Youll learn about some common CSRF vulnerabilities, and how to prevent them.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/csrf',
         img: '22.gif'
       },
@@ -1076,7 +1083,7 @@ body { overflow: hidden; background: #fff; }
         id: '0043',
         title: 'File upload vulnerabilities',
         desc: 'In this learning path, youll explore how simple file upload functions can become a vector for severe attacks. Youll learn how to bypass common defense mechanisms to upload a web shell, enabling full control over a vulnerable web server.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/file-upload-vulnerabilities',
         img: '23.gif'
       },
@@ -1084,7 +1091,7 @@ body { overflow: hidden; background: #fff; }
         id: '0044',
         title: 'Web LLM attacks',
         desc: 'This learning path teaches you how to perform attacks using Large Language Models (LLMs). Youll learn how to construct attacks that take advantage of an LLMs access to data, API, and user information that you would not be able to access directly.',
-        tags: ['aiml'],
+        tags: ['aiml','webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/llm-attacks',
         img: '24.gif'
       },
@@ -1092,7 +1099,7 @@ body { overflow: hidden; background: #fff; }
         id: '0045',
         title: 'API testing',
         desc: 'This learning path teaches you how to test APIs that arent fully used by the website front-end. Youll learn key API recon skills to help you discover more attack surface. In addition, youll learn how to identify server-side parameter pollution vulnerabilities that may impact internal APIs.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/api-testing',
         img: '25.gif'
       },
@@ -1100,7 +1107,7 @@ body { overflow: hidden; background: #fff; }
         id: '0046',
         title: 'Server-side vulnerabilities',
         desc: 'This learning path introduces you to a range of common server-side vulnerabilities. This is perfect if youre new to web security and want to get an overview of the kinds of vulnerabilities that exist, as well as how an attacker might identify and exploit them in real-world systems.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/server-side-vulnerabilities-apprentice',
         img: '26.gif'
       },
@@ -1108,7 +1115,7 @@ body { overflow: hidden; background: #fff; }
         id: '0047',
         title: 'SQL injection',
         desc: 'This learning path introduces SQL injection (SQLi), a critical web vulnerability. Youll learn how to detect and exploit SQLi to uncover hidden data and manipulate application behavior, as well as essential techniques to secure applications against SQLi attacks.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://portswigger.net/web-security/learning-paths/sql-injection',
         img: '27.gif'
       },
@@ -1116,7 +1123,7 @@ body { overflow: hidden; background: #fff; }
         id: '0048',
         title: 'OST',
         desc: 'Dedicated Space for learning all sorts of topics with a focus on low-level exploitation.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://www.opensecuritytraining.info/Training.html',
         img: '28.gif'
       },
@@ -1188,7 +1195,7 @@ body { overflow: hidden; background: #fff; }
         id: '0057',
         title: 'Introduction to Vulnerability Assessment',
         desc: 'This is a lecture and lab based class giving an introduction to vulnerability assessment of some common common computing technologies.  Instructor-led lab exercises are used to demonstrate specific tools and technologies.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://www.opensecuritytraining.info/IntroductionToVulnerabilityAssessment.html',
         img: '37.gif'
       },
@@ -1196,14 +1203,14 @@ body { overflow: hidden; background: #fff; }
         id: '0058',
         title: 'Introduction to Trusted Computing',
         desc: 'This course is an introduction to the fundamental technologies behind Trusted Computing. You will learn what Trusted Platform Modules (TPMs) are and what capabilities they can provide both at an in-depth technical level and in an enterprise context. You will also learn about how other technologies such as the Dynamic Root of Trust for Measurement (DRTM) and virtualization can both take advantage of TPMs and be used to enhance the TPMs capabilities.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://www.opensecuritytraining.info/IntroToTrustedComputing.html',
         img: '38.gif'
       },
       {
         id: '0059',
         title: 'Offensive, Defensive, and Forensic Techniques for Determining Web User Identity',
-        desc: 'This course looks at web users from a few different perspectives.  First, we look at identifying techniques to determine web user identities from a server perspective.  Second, we will look at obfuscating techniques from a user whom seeks to be anonymous.  Finally, we look at forensic techniques, which, when given a hard drive or similar media, we identify users who accessed that server.',
+        desc: 'This course looks at web users from a few different perspectives. First, we look at identifying techniques to determine web user identities from a server perspective.  Second, we will look at obfuscating techniques from a user whom seeks to be anonymous.  Finally, we look at forensic techniques, which, when given a hard drive or similar media, we identify users who accessed that server.',
         tags: [''],
         href: 'https://www.opensecuritytraining.info/WebIdentity.html',
         img: '39.gif'
@@ -1220,7 +1227,7 @@ body { overflow: hidden; background: #fff; }
         id: '0061',
         title: 'Malware Dynamic Analysis',
         desc: 'This introductory malware dynamic analysis class is dedicated to people who are starting to work on malware analysis or who want to know what kinds of artifacts left by malware can be detected via various tools. The class will be a hands-on class where students can use various tools to look for how malware is: Persisting, Communicating, and Hiding',
-        tags: ['exploits'],
+        tags: ['exploits','blue'],
         href: 'https://www.opensecuritytraining.info/MalwareDynamicAnalysis.html',
         img: '41.gif'
       },
@@ -1244,7 +1251,7 @@ body { overflow: hidden; background: #fff; }
         id: '0064',
         title: 'The Life of Binaries',
         desc: '',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://www.opensecuritytraining.info/LifeOfBinaries.html',
         img: '44.gif'
       },
@@ -1340,7 +1347,7 @@ body { overflow: hidden; background: #fff; }
         id: '0076',
         title: 'OST2',
         desc: 'Version 2 of OST.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses',
         img: '56.gif'
       },
@@ -1356,7 +1363,7 @@ body { overflow: hidden; background: #fff; }
         id: '0078',
         title: 'Architecture 4031: Introductory coreboot',
         desc: 'This course concentrates on bootstrapping knowledge about coreboot design principles and boot process. It also helps you prepare a coreboot development environment in the way professional coreboot service providers use. A correctly set envionment should lead to successful building and running QEMU emulated target.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch4031_x86-64_RV_coreboot+2021_v1/about',
         img: '58.gif'
       },
@@ -1380,7 +1387,7 @@ body { overflow: hidden; background: #fff; }
         id: '0081',
         title: 'Debuggers 1015: Introductory Simics',
         desc: 'This course teaches you how to use the Simics full system simulator debugger well enough to use it in classes that depend on it (like Architecture 4001.)',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1015_Simics_1+2021_v1/about',
         img: '61.gif'
       },
@@ -1388,7 +1395,7 @@ body { overflow: hidden; background: #fff; }
         id: '0082',
         title: 'Reverse Engineering 3201: Symbolic Analysis',
         desc: 'This class is designed to be hands-on, and we will be using several Python frameworks against CTF challenges: a binary analysis framework called angr and a SMT solver called z3. These two tools are well known to CTF players as they are often used to save time when working on reverse engineering challenges, this is also the path we will follow.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+RE3201_symexec+2021_V1/about',
         img: '62.gif'
       },
@@ -1404,7 +1411,7 @@ body { overflow: hidden; background: #fff; }
         id: '0084',
         title: 'Hardware 1101: Intel SPI Analysis',
         desc: 'In the OST2 Arch4001: Intel Firmware Attack & Defense class, as we deep-dive into how an OS-resident attacker can attempt to rewrite the SPI flash chip where the UEFI BIOS lives, we stop our deep dive at the Intel Memory Mapped Input/Output (MMIO) interface. This is a special memory range containing registers, which if poked in just the right way, cause reads and writes to the SPI flash chip to "magically" happen. But wouldnt it be nice to see whats behind the magic? And sniff the actual SPI commands that are issued on the SPI bus by the Intel hardware to the SPI flash chip? In this workshop we go down to that level!',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+hw1101_intel_spi+2023_v1/about',
         img: '64.gif'
       },
@@ -1428,7 +1435,7 @@ body { overflow: hidden; background: #fff; }
         id: '0087',
         title: 'Architecture 4021: Introductory UEFI',
         desc: 'Discover the world of UEFI and PI Specifications with our comprehensive course. Well begin by diving into firmware fundamentals, exploring key terminology, and providing a succinct overview of the history of BIOS implementations. Throughout the course, youll gain a solid grasp of essential UEFI concepts and learn how they shape the boot flow on modern platforms.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch4021_intro_UEFI+2023_v1/about',
         img: '67.gif'
       },
@@ -1460,7 +1467,7 @@ body { overflow: hidden; background: #fff; }
         id: '0091',
         title: 'Debuggers 3301: HyperDbg',
         desc: 'Throughout the course, you will learn how to leverage HyperDbgs unique features to conduct in-depth analysis of both kernel and user executions. The debugger operates on top of Windows by virtualizing a running system using Intel VT-x, without relying on APIs and traditional software debugging mechanisms. It extensively utilizes the Second Layer Page Table (Extended Page Table or EPT) to monitor and track code execution.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg3301_HyperDbg+2023_v1/about',
         img: '71.gif'
       },
@@ -1476,7 +1483,7 @@ body { overflow: hidden; background: #fff; }
         id: '0093',
         title: 'Architecture 1005: RISC-V Assembly',
         desc: 'In this class we take a top-down approach of looking at simple C code, compiling it, and then understanding the assembly instructions that were generated. We look at new C examples designed to introduce the fewest new instructions at a time. And we use programatically-randomized games and spaced repetition to reinforce the students memorization of what the instructions do.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch1005_IntroRISCV+2024_v1/about',
         img: '73.gif'
       },
@@ -1508,7 +1515,7 @@ body { overflow: hidden; background: #fff; }
         id: '0097',
         title: 'Trusted Computing 1101: Introductory Trusted Platform Module (TPM) usage',
         desc: 'Trusted Platform Modules (TPM) are the most popular hardware security modules (HSM), widely adopted in personal computers, workstations, network equipment and servers. Nowadays, there is also a trend of integrating TPM 2.0 solutions in embedded systems, such as Medical, Industrial and Internet of Things products. This makes the knowledge of TPM very useful and important.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+TC1101_IntroTPM+2024_v2/about',
         img: '77.gif'
       },
@@ -1516,7 +1523,7 @@ body { overflow: hidden; background: #fff; }
         id: '0098',
         title: 'Trusted Computing 1102: Intermediate Trusted Platform Module (TPM) usage',
         desc: 'Trusted Platform Modules (TPM) are the most popular hardware security modules (HSM), widely adopted in laptops, network equipment and embedded systems. This course builds upon TC1101 and expands our skillset with usage of TPM-based machine identity, system integrity (attestation) and deep dive into the Endorsement Hierarchy. A special lecture in the course is dedicated to the unique TPM extended authorization and TPM 2.0 policy commands, with a focus on PCR Policy.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+TC1102_IntermediateTPM+2024_v1/about',
         img: '78.gif'
       },
@@ -1524,7 +1531,7 @@ body { overflow: hidden; background: #fff; }
         id: '0099',
         title: 'Debuggers 1101: Introductory IDA',
         desc: 'This mini-course introduces the IDA user interface and focuses on how to use the debugger. It covers tasks such as installation, loading a binary, using breakpoints, stepping through execution, and examining memory and registers.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1101_IntroIDA+2024_v1/about',
         img: '79.gif'
       },
@@ -1540,7 +1547,7 @@ body { overflow: hidden; background: #fff; }
         id: '0101',
         title: 'Debuggers 1011: Introductory WinDbg',
         desc: 'This mini-course teaches you how to use the Windows Debugger (WinDbg) well enough to use it in classes that depend on it. (Like Architecture 1001: x86-64 assembly.)',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1011_WinDbg1+2024_v1/about',
         img: '81.gif'
       },
@@ -1556,7 +1563,7 @@ body { overflow: hidden; background: #fff; }
         id: '0103',
         title: 'Debuggers 1103: Introductory Binary Ninja',
         desc: 'This course introduces the Binary Ninja user interface and focuses on how to use the debugger. It covers tasks such as installation, loading a binary, using breakpoints, stepping through execution, and examining memory and registers.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1103_Intro_Binja+2025_v1/about',
         img: '83.gif'
       },
@@ -1660,7 +1667,7 @@ body { overflow: hidden; background: #fff; }
         id: '0116',
         title: 'HackTricks',
         desc: 'A collection of notes and techniques involved in penetration testing. HackTricks covers everything from Generic Methofology to Crypto and Steganography.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://book.hacktricks.wiki/en/index.html',
         img: '96.gif'
       },
@@ -1676,7 +1683,7 @@ body { overflow: hidden; background: #fff; }
         id: '0118',
         title: 'The Web Application Hackers Handbook ~ 2nd Edition',
         desc: 'Textbook.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://archive.org/details/dafydd-stuttard-marcus-pinto-the-web-application-hackers-handbook-finding-and-ex/mode/2up',
         img: '98.gif'
       },
@@ -1692,7 +1699,7 @@ body { overflow: hidden; background: #fff; }
         id: '0120',
         title: 'A Bug Hunters Diary Explanation',
         desc: 'Textbook.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://github.com/rng70/Hacking-Resources/blob/master/Exploiting%20Books/A%20Bug%20Hunters%20Diary%20Explanation.pdf',
         img: '100.gif'
       },
@@ -1700,7 +1707,7 @@ body { overflow: hidden; background: #fff; }
         id: '0121',
         title: 'AFL Fuzzing Workflows ',
         desc: 'Textbook.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://github.com/rng70/Hacking-Resources/blob/master/Exploiting%20Books/AFL%20Fuzzing%20Workflows.pdf',
         img: '101.gif'
       },
@@ -1708,7 +1715,7 @@ body { overflow: hidden; background: #fff; }
         id: '0122',
         title: 'Bug Hunting with American Fuzzy Lop',
         desc: 'Textbook.',
-        tags: [''],
+        tags: ['exploits','webappsec'],
         href: 'https://github.com/rng70/Hacking-Resources/blob/master/Exploiting%20Books/Bug%20Hunting%20with%20American%20Fuzzy%20Loop.pdf',
         img: '102.gif'
       },
@@ -1740,7 +1747,7 @@ body { overflow: hidden; background: #fff; }
         id: '0126',
         title: 'Reversing ~ Secrets of Reverse Engineering',
         desc: 'Textbook',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://github.com/rng70/Hacking-Resources/blob/master/Exploiting%20Books/Reversing%20Secrets%20of%20Reverse%20Engineering.pdf',
         img: '106.gif'
       },
@@ -1764,7 +1771,7 @@ body { overflow: hidden; background: #fff; }
         id: '0129',
         title: 'The IDA Pro Book',
         desc: 'Textbook',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://github.com/rng70/Hacking-Resources/blob/master/Exploiting%20Books/The%20IDA-Pro%20Book.pdf',
         img: '109.gif'
       },
@@ -1772,7 +1779,7 @@ body { overflow: hidden; background: #fff; }
         id: '0130',
         title: 'Becoming a Hacker',
         desc: 'A Robust repository on how to become a hacker from the ground up.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://github.com/rng70/Hacking-Resources',
         img: '110.gif'
       },
@@ -1940,7 +1947,7 @@ body { overflow: hidden; background: #fff; }
         id: '0151',
         title: 'Decimal-hexadecimal-binary conversion table',
         desc: '',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://servicenow.iu.edu/kb?id=kb_article_view&sysparm_article=KB0026046',
         img: '132.gif'
       },
@@ -1956,7 +1963,7 @@ body { overflow: hidden; background: #fff; }
         id: '0153',
         title: 'GuidedHacking Youtube Playlists',
         desc: 'Step-by-step tutorials from Game Hacking to Binary Exploit Development.',
-        tags: [''],
+        tags: ['game','exploits','red'],
         href: 'https://www.youtube.com/@GuidedHacking/playlists',
         img: '134.gif'
       },
@@ -1964,7 +1971,7 @@ body { overflow: hidden; background: #fff; }
         id: '0154',
         title: 'GuidedHacking - Learn Game Hacking',
         desc: 'GuidedHacking Home Page for learning how to hack.',
-        tags: [''],
+        tags: ['game'],
         href: 'https://guidedhacking.com/',
         img: '135.gif'
       },
@@ -2116,7 +2123,7 @@ body { overflow: hidden; background: #fff; }
         id: '0182',
         title: 'Tools for Red Team Operations',
         desc: 'PenTest and Red Teams Tools by Joas and S3cur3Th1sSh1t',
-        tags: [''],
+        tags: ['red'],
         href: 'https://github.com/CyberSecurityUP/Awesome-Red-Team-Operations',
         img: '47.gif'
       },
@@ -2124,7 +2131,7 @@ body { overflow: hidden; background: #fff; }
         id: '0183',
         title: 'List of Awesome Red Team Resources',
         desc: 'This list is for anyone wishing to learn about Red Teaming but do not have a starting point.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://github.com/yeyintminthuhtut/Awesome-Red-Teaming',
         img: '42.gif'
       },
@@ -2132,7 +2139,7 @@ body { overflow: hidden; background: #fff; }
         id: '0184',
         title: 'Red Teaming/Adversary Simulation Toolkit',
         desc: 'A collection of open source and commercial tools that aid in red team operations. This repository will help you during red team engagement. If you want to contribute to this list send me a pull request.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://0x1.gitlab.io/pentesting/Red-Teaming-Toolkit/#reconnaissance',
         img: '26.gif'
       },
@@ -2140,7 +2147,7 @@ body { overflow: hidden; background: #fff; }
         id: '0185',
         title: 'Awesome Cybersecurity Blueteam Resources',
         desc: 'A curated collection of awesome resources, tools, and other shiny things for cybersecurity blue teams.',
-        tags: [''],
+        tags: ['blue'],
         href: 'https://github.com/fabacab/awesome-cybersecurity-blueteam',
         img: '30.gif'
       },
@@ -2148,7 +2155,7 @@ body { overflow: hidden; background: #fff; }
         id: '0186',
         title: 'Awesome OSINT Resources',
         desc: 'A curated list of amazingly awesome OSINT. This list is to help all of those who are into Cyber Threat Intellience (CTI), threat hunting, or OSINT. From beginners to advanced.',
-        tags: [''],
+        tags: ['osint'],
         href: 'https://github.com/jivoi/awesome-osint',
         img: '24.gif'
       },
@@ -2156,7 +2163,7 @@ body { overflow: hidden; background: #fff; }
         id: '0187',
         title: 'Awesome Pentest Resources',
         desc: 'A collection of awesome penetration testing resources, tools and other shiny things',
-        tags: [''],
+        tags: ['red'],
         href: 'https://github.com/enaqx/awesome-pentest',
         img: '34.gif'
       },
@@ -2164,7 +2171,7 @@ body { overflow: hidden; background: #fff; }
         id: '0188',
         title: 'Awesome Cloud-PenTest Resources',
         desc: '',
-        tags: [''],
+        tags: ['infra'],
         href: 'https://github.com/CyberSecurityUP/Awesome-Cloud-PenTest',
         img: '64.gif'
       },
@@ -2172,7 +2179,7 @@ body { overflow: hidden; background: #fff; }
         id: '0189',
         title: 'Awesome Shodan Queries',
         desc: 'A collection of interesting, funny, and depressing search queries to plug into shodan.io',
-        tags: [''],
+        tags: ['osint'],
         href: 'https://github.com/jakejarvis/awesome-shodan-queries',
         img: '63.gif'
       },
@@ -2180,7 +2187,7 @@ body { overflow: hidden; background: #fff; }
         id: '0190',
         title: 'Awesome AWS Security Resources',
         desc: 'Curated list of links, references, books videos, tutorials (Free or Paid), Exploit, CTFs, Hacking Practices etc. which are related to AWS Security',
-        tags: [''],
+        tags: ['infra'],
         href: 'https://github.com/jassics/awesome-aws-security',
         img: '52.gif'
       },
@@ -2188,7 +2195,7 @@ body { overflow: hidden; background: #fff; }
         id: '0191',
         title: 'Awesome Malware & Reverse Engineering Resources',
         desc: 'Malware and Reverse Engineering Complete Collection by Joas',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://github.com/CyberSecurityUP/Awesome-Malware-and-Reverse-Engineering',
         img: '70.gif'
       },
@@ -2196,7 +2203,7 @@ body { overflow: hidden; background: #fff; }
         id: '0192',
         title: 'Awesome Malware Analysis Resources',
         desc: 'A curated list of awesome malware analysis tools and resources. Inspired by awesome-python and awesome-php.',
-        tags: [''],
+        tags: ['exploits','blue'],
         href: 'https://github.com/rshipp/awesome-malware-analysis',
         img: '97.gif'
       },
@@ -2212,7 +2219,7 @@ body { overflow: hidden; background: #fff; }
         id: '0194',
         title: 'Awesome Cloud Security Resources',
         desc: '',
-        tags: [''],
+        tags: ['infra'],
         href: 'https://github.com/4ndersonLin/awesome-cloud-security',
         img: '96.gif'
       },
@@ -2220,7 +2227,7 @@ body { overflow: hidden; background: #fff; }
         id: '0195',
         title: 'Awesome Reversing Resources',
         desc: 'A curated list of awesome reversing resources',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://github.com/tylerha97/awesome-reversing',
         img: '90.gif'
       },
@@ -2228,7 +2235,7 @@ body { overflow: hidden; background: #fff; }
         id: '0196',
         title: 'Awesome Threat Intelligence Resources',
         desc: 'A curated list of awesome Threat Intelligence resources.',
-        tags: [''],
+        tags: ['osint'],
         href: 'https://github.com/hslatman/awesome-threat-intelligence',
         img: '120.gif'
       },
@@ -2236,7 +2243,7 @@ body { overflow: hidden; background: #fff; }
         id: '0197',
         title: 'Awesome SOC Resources',
         desc: 'A collection of sources of documentation, as well as field best practices, to build/run a SOC',
-        tags: [''],
+        tags: ['blue'],
         href: 'https://github.com/cyb3rxp/awesome-soc',
         img: '121.gif'
       },
@@ -2244,7 +2251,7 @@ body { overflow: hidden; background: #fff; }
         id: '0198',
         title: 'Awesome Social Engineering Resources',
         desc: 'A curated list of awesome social engineering resources.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://github.com/giuliacassara/awesome-social-engineering',
         img: '128.gif'
       },
@@ -2252,7 +2259,7 @@ body { overflow: hidden; background: #fff; }
         id: '0199',
         title: 'Awesome Web Security Resources',
         desc: 'A curated list of Web Security materials and resources.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://github.com/qazbnm456/awesome-web-security#prototype-pollution',
         img: '130.gif'
       },
@@ -2268,7 +2275,7 @@ body { overflow: hidden; background: #fff; }
         id: '0201',
         title: 'Awesome web3 Security',
         desc: 'A curated list of web3Security materials and resources For Pentesters and Bug Hunters.',
-        tags: [''],
+        tags: ['red','webappsec'],
         href: 'https://github.com/Anugrahsr/Awesome-web3-Security',
         img: '67.gif'
       },
@@ -2276,7 +2283,7 @@ body { overflow: hidden; background: #fff; }
         id: '0202',
         title: 'Awesome Incident Response Resources',
         desc: 'A curated list of tools and resources for security incident response, aimed to help security analysts and DFIR teams.',
-        tags: [''],
+        tags: ['blue'],
         href: 'https://github.com/Correia-jpv/fucking-awesome-incident-response',
         img: '79.gif'
       },
@@ -2284,7 +2291,7 @@ body { overflow: hidden; background: #fff; }
         id: '0203',
         title: 'Awesome Hacker Search Engines',
         desc: 'A curated list of awesome search engines useful during Penetration testing, Vulnerability assessments, Red/Blue Team operations, Bug Bounty and more.',
-        tags: [''],
+        tags: ['osint'],
         href: 'https://github.com/edoardottt/awesome-hacker-search-engines',
         img: '88.gif'
       },
@@ -2308,7 +2315,7 @@ body { overflow: hidden; background: #fff; }
         id: '0206',
         title: 'Awesome Cloud Pentest Resources',
         desc: '',
-        tags: [''],
+        tags: ['infra','red'],
         href: 'https://github.com/CyberSecurityUP/Awesome-Cloud-PenTest',
         img: '69.gif'
       },
@@ -2316,7 +2323,7 @@ body { overflow: hidden; background: #fff; }
         id: '0207',
         title: 'Awesome Burp Extensions',
         desc: 'A curated list of amazingly awesome Burp Extensions.',
-        tags: [''],
+        tags: ['red','webappsec'],
         href: 'https://github.com/snoopysecurity/awesome-burp-extensions?tab=readme-ov-file',
         img: '73.gif'
       },
@@ -2348,7 +2355,7 @@ body { overflow: hidden; background: #fff; }
         id: '0211',
         title: 'Awesome Telegram OSINT Resources',
         desc: 'A Curated List of Awesome Telegram OSINT Tools, Sites & Resources.',
-        tags: [''],
+        tags: ['osint'],
         href: 'https://github.com/ItIsMeCall911/Awesome-Telegram-OSINT#-bots',
         img: '137.gif'
       },
@@ -2372,7 +2379,7 @@ body { overflow: hidden; background: #fff; }
         id: '0214',
         title: 'Awesome Reversing Resources',
         desc: 'A curated list of awesome reversing resources.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://github.com/tylerha97/awesome-reversing',
         img: '1234.gif'
       },
@@ -2388,7 +2395,7 @@ body { overflow: hidden; background: #fff; }
         id: '0216',
         title: 'Awesome Web Hacking Resources',
         desc: 'This list is for anyone wishing to learn about web application security but do not have a starting point.',
-        tags: [''],
+        tags: ['webappsec'],
         href: 'https://github.com/infoslack/awesome-web-hacking',
         img: 'theOne.gif'
       },
@@ -2404,7 +2411,7 @@ body { overflow: hidden; background: #fff; }
         id: '0218',
         title: 'Awesome OSCP Resources',
         desc: 'A curated list of awesome OSCP resources.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://github.com/0x4D31/awesome-oscp',
         img: 'obg.gif'
       },
@@ -2412,7 +2419,7 @@ body { overflow: hidden; background: #fff; }
         id: '0219',
         title: 'Resources on RATs',
         desc: 'RAT And C&C Resources. 250+ Open Source Projects, 1200+ RAT/C&C blog/video.',
-        tags: [''],
+        tags: ['red'],
         href: 'https://github.com/alphaSeclab/awesome-rat/blob/master/Readme_en.md',
         img: 'k.gif'
       },
@@ -2420,7 +2427,7 @@ body { overflow: hidden; background: #fff; }
         id: '0220',
         title: 'deepdark CTI Resources',
         desc: 'Collection of Cyber Threat Intelligence sources from the deep and dark web.',
-        tags: [''],
+        tags: ['osint'],
         href: 'https://github.com/fastfire/deepdarkCTI/tree/main',
         img: 'black.gif'
       },
@@ -2428,7 +2435,7 @@ body { overflow: hidden; background: #fff; }
         id: '0221',
         title: 'UEFI Lessons',
         desc: 'These series of lessons are intendend to get you started with UEFI programming in Linux with the help of EDKII.',
-        tags: [''],
+        tags: ['exploits'],
         href: 'https://github.com/Kostr/UEFI-Lessons?tab=readme-ov-file',
         img: 'cool.gif'
       }, 
