@@ -35,6 +35,7 @@
        If you have "Bank Gothic" files, replace the @font-face below or
        install locally and keep font-family: 'Bank Gothic'. -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
   <style>
     /* ===========================================================
@@ -171,7 +172,7 @@
     
     .headshot{
       width:100%; aspect-ratio:3/4; border-radius:var(--radius);
-      border:1px solid var(--line); background:#0c0d0f url('nerd.jpg') center/cover no-repeat;  
+      border:1px solid var(--line); background:#0c0d0f url('cool.jpg') center/cover no-repeat;  
       box-shadow:var(--shadow);
     }
     .bio{
@@ -277,6 +278,38 @@
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
     }
+    .links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: left;
+    align-items: left;
+    padding: 1rem 0;
+    }
+
+    .link {
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .link i {
+    font-size: 2rem;
+    }
+
+    .link:hover {
+    transform: scale(1.1);
+    }
+
+    .glaze {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    }
+
   </style>
 </head>
 <body data-theme="dark">
@@ -290,38 +323,37 @@
     <aside class="rail" aria-label="Primary links">
       <div class="brand" aria-label="Site brand">
         <div class="dot" aria-hidden="true"></div>
-        <h1>MY HUB</h1>
+        <h1>MY Research</h1>
       </div>
       <p class="hint">Quick links</p>
 
-      <nav class="links">
-        <!-- Replace URLs with your own -->
-        <a class="link" href="https://www.linkedin.com/in/n%CF%86x1r-%E2%88%86ssa-901750289/" target="_blank" rel="noopener">
-          <h3>LinkedIn</h3>
-          <p>Professional profile &amp; network</p>
-          <span class="glaze" aria-hidden="true"></span>
-        </a>
-        <a class="link" href="https://github.com/KazamaDono" target="_blank" rel="noopener">
-          <h3>GitHub</h3>
-          <p>Code, projects &amp; OSS</p>
-          <span class="glaze" aria-hidden="true"></span>
-        </a>
-        <a class="link" href="https://orcid.org/0009-0000-7507-8660" target="_blank" rel="noopener">
-          <h3>ORCID</h3>
-          <p>Publications &amp; research</p>
-          <span class="glaze" aria-hidden="true"></span>
-        </a>
-        <a class="link" href="https://medium.com/@delta_core" target="_blank" rel="noopener">
-          <h3>Medium</h3>
-          <p>Articles &amp; writeups</p>
-          <span class="glaze" aria-hidden="true"></span>
-        </a>
-        <a class="link" href="https://discord.gg/wx6xXVGE6g" target="_blank" rel="noopener">
-          <h3>Discord</h3>
-          <p>Chat &amp; collaboration</p>
-          <span class="glaze" aria-hidden="true"></span>
-        </a>
-      </nav>
+<nav class="links">
+  <a class="link" href="https://www.linkedin.com/in/n%CF%86x1r-%E2%88%86ssa-901750289/" target="_blank" rel="noopener" title="LinkedIn">
+    <i class="fab fa-linkedin fa-2x"></i>
+    <span class="glaze" aria-hidden="true"></span>
+  </a>
+  
+  <a class="link" href="https://github.com/KazamaDono" target="_blank" rel="noopener" title="GitHub">
+    <i class="fab fa-github fa-2x"></i>
+    <span class="glaze" aria-hidden="true"></span>
+  </a>
+
+  <a class="link" href="https://orcid.org/0009-0000-7507-8660" target="_blank" rel="noopener" title="ORCID">
+    <i class="fab fa-orcid fa-2x"></i>
+    <span class="glaze" aria-hidden="true"></span>
+  </a>
+
+  <a class="link" href="https://medium.com/@delta_core" target="_blank" rel="noopener" title="Medium">
+    <i class="fab fa-medium fa-2x"></i>
+    <span class="glaze" aria-hidden="true"></span>
+  </a>
+
+  <a class="link" href="https://discord.gg/wx6xXVGE6g" target="_blank" rel="noopener" title="Discord">
+    <i class="fab fa-discord fa-2x"></i>
+    <span class="glaze" aria-hidden="true"></span>
+  </a>
+</nav>
+
 
       <p class="section-title">Navigate</p>
       <nav class="links">
@@ -342,7 +374,6 @@
   <div class="hero-inner">
     <h2 class="h-xl" id="typingHeading"></h2>
     <p class="h-sub">
-      Hello! I’m Nour Issa, a hacker and Computer Security Researcher. This hub is a collection of my links, projects, and online presence. Explore and connect!
     </p>
     <canvas id="dnaCanvas" role="img" aria-label="Animated binary DNA helix"></canvas>
   </div>
@@ -361,7 +392,7 @@
 </style>
 
 <script>
-  const text = "WELCOME TO MY HUB";
+  const text = "WELCOME TO SPECTRA";
   const heading = document.getElementById("typingHeading");
   let index = 0;
 
@@ -384,7 +415,7 @@
       <div class="headshot" aria-label="Profile photo area"></div>
       <div class="bio">
         <h2>Spectra VRG</h2>
-        <p>A central place for my work, research, and things I'm exploring — with a living strand of binary spiraling upward.</p>
+        <p>      Spectra was established as a dedicated research initiative focused on understanding complex systems, identifying vulnerabilities, and advancing exploit development. The objective is to systematically explore, document, and disseminate findings, creating a platform that evolves alongside ongoing research. Professionals interested in knowledge exchange, collaboration, or discussion of emerging techniques are welcome to connect and contribute.</p>
       </div>
       
       <div class="controls" aria-label="Quick controls">
