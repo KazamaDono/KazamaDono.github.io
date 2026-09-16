@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/png" href="Dorothea_Coyett_CS.webp">
+  <link rel="icon" type="image/png" href="assets/Dorothea_Coyett_CS.webp">
 
   <script>
     // Tailwind config: extended aqua/teal neon palette
@@ -93,7 +93,7 @@
   <canvas id="introParticles" aria-hidden="true"></canvas>
   <div class="intro-content">
     <div class="intro-glitch">
-      <img src="anarchy_logo2.png" alt="Anarchy Logo" class="intro-logo" />
+      <img src="assets/anarchy_logo2.png" alt="Anarchy Logo" class="intro-logo" />
       <img src="" alt="" class="intro-logo layer blue" aria-hidden="true" />
     </div>
     <div class="intro-text">
@@ -404,7 +404,7 @@ body { overflow: hidden; background: #fff; }
         <!-- HUD logo -->
         <button id="logoBtn" aria-label="Neo Aqua Home" class="flex items-center gap-3 group">
           <!-- Replaced SVG with image -->
-          <img src="Dorothea_Coyett_CS.webp" alt="Dorothea Coyett Logo" class="w-9 h-9 object-contain" />
+          <img src="assets/Dorothea_Coyett_CS.webp" alt="Dorothea Coyett Logo" class="w-9 h-9 object-contain" />
 
           <div class="text-left">
             <h1 class="font-display text-xl sm:text-2xl tracking-widest glitched leading-none">ANARCHY</h1>
@@ -2667,7 +2667,7 @@ body { overflow: hidden; background: #fff; }
         // CSS placeholder shown until img loads; onerror keeps it visible.
         imgHtml = `
           <div class="relative w-full h-40 rounded-lg mb-3 overflow-hidden" style="background:${gradientBg}">
-            <img src="${escapeHtml(course.img)}"
+            <img src="${escapeHtml(/^https?:/i.test(String(course.img)) ? course.img : 'assets/' + course.img)}"
                  alt="${escapeHtml(course.title)}"
                  class="w-full h-40 object-cover rounded-lg"
                  loading="lazy" decoding="async"
