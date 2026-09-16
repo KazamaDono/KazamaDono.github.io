@@ -2730,31 +2730,89 @@ body { overflow: hidden; background: #fff; }
         .replace(/'/g, '&#39;');
     }
 
-    // Render all cards initially
-    function renderAllCourses() {
-      coursesRoot.innerHTML = coursesData.map(renderCourseCard).join('\n');
-      attachCardHandlers();
-      applyFilters();
+    // -------------------------------------------------------------------------
+    // Render / filter with batched (infinite-scroll) hydration.
+    //
+    // Every course in coursesData stays in memory, but only a window of them
+    // is mounted in the DOM at any time. An IntersectionObserver watches a
+    // sentinel near the bottom of the grid and mounts the next batch as the
+    // user approaches it — so 1,700+ entries never all render at once.
+    // Filtering / search rebuild the window against the filtered list rather
+    // than toggling display on every card.
+    // -------------------------------------------------------------------------
+    const RENDER_BATCH = 48;
+    let filteredData = [];
+    let renderedCount = 0;
+    let ioSentinel = null;
+    let ioObserver = null;
+
+    function ensureSentinel() {
+      if (!ioSentinel || !ioSentinel.isConnected) {
+        ioSentinel = document.createElement('div');
+        ioSentinel.id = 'courses-sentinel';
+        ioSentinel.className = 'col-span-full h-8';
+        ioSentinel.setAttribute('aria-hidden', 'true');
+        coursesRoot.appendChild(ioSentinel);
+      } else if (coursesRoot.lastElementChild !== ioSentinel) {
+        coursesRoot.appendChild(ioSentinel);
+      }
+      if (!ioObserver) {
+        ioObserver = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting && renderedCount < filteredData.length) {
+              renderNextBatch();
+            }
+          }
+        }, { root: null, rootMargin: '600px 0px', threshold: 0 });
+      }
+      ioObserver.observe(ioSentinel);
     }
 
-    // -------------------------------------------------------------------------
-    // Filtering & search
-    // -------------------------------------------------------------------------
-    function applyFilters() {
+    function renderNextBatch() {
+      const slice = filteredData.slice(renderedCount, renderedCount + RENDER_BATCH);
+      if (!slice.length) return 0;
+      const wrap = document.createElement('div');
+      wrap.innerHTML = slice.map(renderCourseCard).join('');
+      const frag = document.createDocumentFragment();
+      while (wrap.firstChild) frag.appendChild(wrap.firstChild);
+      coursesRoot.insertBefore(frag, ioSentinel);
+      renderedCount += slice.length;
+      attachCardHandlers();
+      // If the sentinel is still in view after mounting (viewport very tall,
+      // or first paint), the observer fires again on the next tick and pulls
+      // another batch until the sentinel scrolls out of range.
+      return slice.length;
+    }
+
+    function computeFilteredData() {
       const q = (searchInput.value || '').toLowerCase().trim();
       const active = document.querySelector('.filter-chip.active')?.dataset.filter || 'all';
-      let visible = 0;
-      const allCards = [...coursesRoot.querySelectorAll('.card')];
-      allCards.forEach(card => {
-        const tags = (card.dataset.tags || '').toLowerCase();
-        const text = (card.innerText || '').toLowerCase();
-        const matchesQuery = !q || text.includes(q) || tags.includes(q);
+      return coursesData.filter(c => {
+        const tags = (c.tags || []).join(',').toLowerCase();
+        const hay = ((c.title || '') + ' ' + (c.desc || '') + ' ' + tags).toLowerCase();
+        const matchesQuery = !q || hay.includes(q);
         const matchesChip = active === 'all' || tags.includes(active);
-        const show = matchesQuery && matchesChip;
-        card.style.display = show ? '' : 'none';
-        if (show) visible++;
+        return matchesQuery && matchesChip;
       });
-      statCoursesEl.textContent = String(visible).padStart(2, '0');
+    }
+
+    function renderAllCourses() {
+      filteredData = computeFilteredData();
+      renderedCount = 0;
+      // Wipe existing cards and any transient placeholders, but never the sentinel.
+      coursesRoot.querySelectorAll('.card').forEach(el => el.remove());
+      coursesRoot.querySelectorAll('.col-span-full').forEach(el => {
+        if (el !== ioSentinel) el.remove();
+      });
+      ensureSentinel();
+      renderNextBatch();
+      statCoursesEl.textContent = String(filteredData.length).padStart(2, '0');
+    }
+
+    // Filter / search share the same rebuild path — the delta is in
+    // computeFilteredData().
+    function applyFilters() {
+      renderAllCourses();
     }
 
     // Hook up chip clicks
