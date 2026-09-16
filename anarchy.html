@@ -436,7 +436,7 @@ body { overflow: hidden; background: #fff; }
           </h2>
           <p class="mt-4 text-slate-400 max-w-prose">Master the art of cyber operations. Explore exploitation, adversarial AI, and defensive strategies—designed for the minds who don’t just follow the system, but understand it.</p>
 
-          <div class="mt-6 flex flex-wrap gap-3 font-mono text-xs" role="tablist" aria-label="Course filter chips">
+          <div class="mt-6 flex flex-wrap gap-2 font-mono text-xs max-h-64 overflow-y-auto pr-1" role="tablist" aria-label="Course filter chips">
             <button class="filter-chip active rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="all" role="tab" aria-selected="true">All</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="aiml" role="tab">AI/ML</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="exploits" role="tab">Low Level</button>
@@ -448,6 +448,16 @@ body { overflow: hidden; background: #fff; }
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="osint" role="tab">OSINT</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="game" role="tab">Game Hacking</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="webappsec" role="tab">BugBounty</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="crypto" role="tab">Crypto</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="re" role="tab">Reversing</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="mobile" role="tab">Mobile</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="cloud" role="tab">Cloud</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="forensics" role="tab">Forensics</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="ctf" role="tab">CTF</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="blockchain" role="tab">Blockchain</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="iot" role="tab">IoT/HW</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="dev" role="tab">Dev/CS</button>
+            <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="math" role="tab">Math</button>
             <button class="filter-chip rounded-full border border-teal-900/40 px-3 py-1 hover:bg-bgd-glow/50" data-filter="project" role="tab">Project</button>
             
 
@@ -464,11 +474,11 @@ body { overflow: hidden; background: #fff; }
           <div class="rounded-2xl border border-teal-900/40 p-6 shadow-glow bg-gradient-to-br from-bgd to-bgd-glow">
             <div class="grid grid-cols-3 gap-4 text-center">
               <div class="p-4 rounded-xl bg-bgd-deep/70 border border-teal-900/30">
-                <div class="font-display text-3xl" id="statCourses">12</div>
+                <div class="font-display text-3xl" id="statCourses">—</div>
                 <div class="font-mono text-[10px] tracking-widest text-slate-400">COURSES</div>
               </div>
               <div class="p-4 rounded-xl bg-bgd-deep/70 border border-teal-900/30">
-                <div class="font-display text-3xl" id="statTracks">10</div>
+                <div class="font-display text-3xl" id="statTracks">—</div>
                 <div class="font-mono text-[10px] tracking-widest text-slate-400">TRACKS</div>
               </div>
               <div class="p-4 rounded-xl bg-bgd-deep/70 border border-teal-900/30">
@@ -506,9 +516,8 @@ body { overflow: hidden; background: #fff; }
 
   <!-- Courses Grid -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-    <div id="courses" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-live="polite">
-
-      <!-- Course cards are populated by JS from data below. -->
+    <div id="courses" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6" aria-live="polite">
+      <!-- Course cards are populated by JS from courses.json (with legacy fallback). -->
     </div>
 
     <!-- Modal: Course detail / preview -->
@@ -757,7 +766,7 @@ body { overflow: hidden; background: #fff; }
 
 
 
-    const initialCourses = [
+    const __LEGACY_INLINE_COURSES__ = [
       {
         id: '0001',
         title: 'LLM System Development',
@@ -2568,11 +2577,64 @@ body { overflow: hidden; background: #fff; }
         img: '235.gif'
       }
     ];
+    /* === END_LEGACY_INLINE_COURSES === */
 
+    let initialCourses = [];
     let coursesData = [];
-    (function seedExplicit() {
-        initialCourses.forEach(c => coursesData.push(c));
+
+    // ---------------------------------------------------------------
+    // Load the full course catalog from courses.json. The old inline
+    // legacy array above is kept as a fallback in case the fetch fails.
+    // ---------------------------------------------------------------
+    async function __loadCourses() {
+      const tryFetch = async () => {
+        const res = await fetch('courses.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      };
+      try {
+        const list = await tryFetch();
+        if (!Array.isArray(list) || list.length === 0) throw new Error('empty');
+        initialCourses = list;
+      } catch (e) {
+        console.warn('[Anarchy] courses.json unavailable, falling back to inline seed:', e && e.message);
+        initialCourses = __LEGACY_INLINE_COURSES__.slice();
+      }
+      __assignFallbackImages(initialCourses);
+      coursesData = initialCourses.slice();
+      renderAllCourses();
+      updateCategoryCounts();
+      applyFilters();
+    }
+
+    // Deterministic image assignment for entries missing an img field.
+    // Uses a small string hash and a curated pool of files known to exist
+    // in the repo. Also produces a CSS-only gradient fallback via
+    // data-* attributes so the card still looks styled if the file is missing.
+    const __IMG_POOL = (function () {
+      const nums = [];
+      for (let i = 1; i <= 141; i++) nums.push(i + '.gif');
+      ['224','225','226','227','228','229','231','233','234','235'].forEach(n => nums.push(n + '.gif'));
+      const named = ['black','circle','cool','download','fgh','final','gl','glitch','grid','hole','k','land','llm23','loop','maze','obg','red','redg','rwa','sh','tunnel','vision','theOne'].map(s => s + '.gif');
+      return nums.concat(named);
     })();
+    function __hashStr(s) {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+      return h >>> 0;
+    }
+    function __pickImg(seed) { return __IMG_POOL[__hashStr(String(seed)) % __IMG_POOL.length]; }
+    function __assignFallbackImages(list) {
+      for (const c of list) {
+        if (!c.img) c.img = __pickImg((c.id || '') + ':' + (c.title || '') + ':' + (c.href || ''));
+        // Clean up common data issues carried from the legacy file
+        if (Array.isArray(c.tags)) c.tags = c.tags.map(t => (t === 'exploit' ? 'exploits' : t)).filter(Boolean);
+        else c.tags = [];
+      }
+    }
+
+    // Kick off the load. renderAllCourses() below is safe to call again.
+    (function seedExplicit() { /* legacy no-op — replaced by __loadCourses */ })();
 
     // take a deep copy snapshot of the seeded catalog for Reset
     const seedSnapshot = JSON.stringify(coursesData);
@@ -2587,29 +2649,34 @@ body { overflow: hidden; background: #fff; }
 
         
 
-    
-    // If course.img is defined, render an image at the top
-    const imgHtml = course.img 
-        ? `<img src="${escapeHtml(course.img)}" alt="${escapeHtml(course.title)}" class="w-full h-40 object-cover rounded-lg mb-3"/>` 
-        : '';
-
-
-    // Detect if the "img" field is a Pinterest embed link
-    let mediaHtml = '';
+    // ---------------------------------------------------------------
+    // Media rendering:
+    //  - a Pinterest URL becomes an iframe
+    //  - any other value is treated as a local file (with an onerror
+    //    fallback to a CSS-only gradient placeholder so the card still
+    //    reads as intentional when a file is missing).
+    // ---------------------------------------------------------------
+    const gradientSeed = __hashStr((course.id || '') + ':' + (course.title || ''));
+    const gradientHue = gradientSeed % 360;
+    const gradientBg = 'linear-gradient(135deg, hsl(' + gradientHue + ' 75% 32% / .55), hsl(' + ((gradientHue + 60) % 360) + ' 90% 45% / .35))';
+    let imgHtml = '';
     if (course.img) {
-      if (course.img.includes("pinterest.com")) {
-        mediaHtml = `
-          <iframe src="${escapeHtml(course.img)}" 
-            class="w-full h-40 rounded-lg mb-3" 
-            style="border:none;" 
-            loading="lazy">
-          </iframe>`;
+      if (String(course.img).includes('pinterest.com')) {
+        imgHtml = `<iframe src="${escapeHtml(course.img)}" class="w-full h-40 rounded-lg mb-3" style="border:none;" loading="lazy"></iframe>`;
       } else {
-        mediaHtml = `
-          <img src="${escapeHtml(course.img)}" 
-            alt="${escapeHtml(course.title)}" 
-            class="w-full h-40 object-cover rounded-lg mb-3"/>`;
+        // CSS placeholder shown until img loads; onerror keeps it visible.
+        imgHtml = `
+          <div class="relative w-full h-40 rounded-lg mb-3 overflow-hidden" style="background:${gradientBg}">
+            <img src="${escapeHtml(course.img)}"
+                 alt="${escapeHtml(course.title)}"
+                 class="w-full h-40 object-cover rounded-lg"
+                 loading="lazy" decoding="async"
+                 onerror="this.style.display='none';this.parentElement.classList.add('img-fallback')"/>
+            <div class="absolute inset-0 pointer-events-none opacity-30 bg-grid bg-[length:20px_20px]" aria-hidden="true"></div>
+          </div>`;
       }
+    } else {
+      imgHtml = `<div class="w-full h-40 rounded-lg mb-3 overflow-hidden bg-grid bg-[length:20px_20px]" style="background:${gradientBg}"></div>`;
     }
 
 
@@ -2976,10 +3043,43 @@ body { overflow: hidden; background: #fff; }
     }
 
     // -------------------------------------------------------------------------
-    // Init render
+    // Category count helper — updates the little "(N)" badges beside filter
+    // chips so operators know how deep each category runs.
     // -------------------------------------------------------------------------
-    renderAllCourses();
-    attachCardHandlersDebounced();
+    function updateCategoryCounts() {
+      const counts = { all: coursesData.length };
+      const tracksSet = new Set();
+      for (const c of coursesData) {
+        for (const t of (c.tags || [])) {
+          counts[t] = (counts[t] || 0) + 1;
+          tracksSet.add(t);
+        }
+      }
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        const key = chip.dataset.filter;
+        const n = key === 'all' ? counts.all : (counts[key] || 0);
+        let badge = chip.querySelector('.chip-count');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'chip-count ml-1 opacity-70 text-[10px]';
+          chip.appendChild(badge);
+        }
+        badge.textContent = ' · ' + n;
+      });
+      // Hero counters
+      const statCourses = document.getElementById('statCourses');
+      const statTracks = document.getElementById('statTracks');
+      if (statCourses) statCourses.textContent = String(coursesData.length);
+      if (statTracks) statTracks.textContent = String(tracksSet.size);
+    }
+
+    // -------------------------------------------------------------------------
+    // Init render — pulls the full catalog from courses.json and re-renders.
+    // -------------------------------------------------------------------------
+    // Show a "loading" placeholder immediately so the grid isn't empty on slow
+    // connections. Replaced as soon as __loadCourses resolves.
+    coursesRoot.innerHTML = '<div class="col-span-full py-16 text-center font-mono text-slate-500 animate-pulse">Loading catalog…</div>';
+    __loadCourses().then(() => attachCardHandlersDebounced());
 
     // Convenience: click logo scrolls to top and focuses search
     document.getElementById('logoBtn').addEventListener('click', (e) => {
