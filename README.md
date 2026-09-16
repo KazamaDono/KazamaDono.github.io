@@ -1,6 +1,6 @@
 <div align="center">
 
-# ▚ ANARCHY ▚
+<img src="assets/anarchy-heading.svg" alt="ANARCHY" width="720" />
 
 ### *Your Personal Student Course Portal for Advanced Systems &amp; Operations*
 

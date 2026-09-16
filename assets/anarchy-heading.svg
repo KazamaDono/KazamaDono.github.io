@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" role="img" aria-label="ANARCHY" preserveAspectRatio="xMidYMid meet">
+  <title>ANARCHY</title>
+  <defs>
+    <filter id="neon" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="b1"/>
+      <feGaussianBlur stdDeviation="2" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff0033" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ff0033" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#ff0033" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      @keyframes flicker {
+        0%, 18%, 22%, 62%, 64%, 100% { opacity: 1; }
+        19%, 21% { opacity: .35; }
+        63%      { opacity: .55; }
+      }
+      @keyframes drift-cyan {
+        0%, 100% { transform: translate(0px, 0px); }
+        18%      { transform: translate(-4px, -1px); }
+        41%      { transform: translate( 3px,  1px); }
+        63%      { transform: translate(-2px,  2px); }
+        82%      { transform: translate( 1px, -2px); }
+      }
+      @keyframes drift-magenta {
+        0%, 100% { transform: translate(0px, 0px); }
+        18%      { transform: translate( 4px,  1px); }
+        41%      { transform: translate(-3px, -1px); }
+        63%      { transform: translate( 2px, -2px); }
+        82%      { transform: translate(-1px,  2px); }
+      }
+      @keyframes slice {
+        0%, 55%, 100% { clip-path: inset(0 0 0 0); }
+        6%   { clip-path: inset(12% 0 68% 0); }
+        14%  { clip-path: inset(48% 0 32% 0); }
+        23%  { clip-path: inset(72% 0  8% 0); }
+        31%  { clip-path: inset(28% 0 54% 0); }
+        44%  { clip-path: inset(58% 0 20% 0); }
+      }
+      @keyframes scan {
+        0%   { transform: translateY(-30px); }
+        100% { transform: translateY(240px); }
+      }
+      .a-txt   { font-family: 'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 900; font-size: 148px; letter-spacing: 12px; }
+      .a-red   { fill: #ff0a3d; filter: url(#neon); animation: flicker 3.6s infinite steps(1); }
+      .a-cyan  { fill: #00e5ff; opacity: .70; mix-blend-mode: screen; animation: drift-cyan 2.0s infinite ease-in-out; }
+      .a-mag   { fill: #ff2bd6; opacity: .70; mix-blend-mode: screen; animation: drift-magenta 2.0s infinite ease-in-out; }
+      .a-slice { animation: slice 3.2s infinite steps(1); }
+      .a-scan  { animation: scan 4.4s infinite linear; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="900" height="220" fill="#08080b"/>
+  <g opacity=".22">
+    <line x1="0" y1="30"  x2="900" y2="30"  stroke="#ff0033" stroke-width="1"/>
+    <line x1="0" y1="90"  x2="900" y2="90"  stroke="#ff0033" stroke-width="1"/>
+    <line x1="0" y1="150" x2="900" y2="150" stroke="#ff0033" stroke-width="1"/>
+    <line x1="0" y1="200" x2="900" y2="200" stroke="#ff0033" stroke-width="1"/>
+  </g>
+  <g transform="translate(450 130)" text-anchor="middle">
+    <text class="a-txt a-mag"           x="0" y="0">ANARCHY</text>
+    <text class="a-txt a-cyan"          x="0" y="0">ANARCHY</text>
+    <text class="a-txt a-red a-slice"   x="0" y="0">ANARCHY</text>
+  </g>
+  <rect class="a-scan" x="0" y="0" width="900" height="20" fill="url(#scan)"/>
+  <rect x="0" y="0" width="900" height="220" fill="none" stroke="#ff0a3d" stroke-opacity=".35" stroke-width="1"/>
+</svg>
